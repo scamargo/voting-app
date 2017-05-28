@@ -1,3 +1,5 @@
+//TODO: create .env for other public projects on c9 and use localhost for db
+
 'use strict';
 
 var express = require('express');
@@ -7,7 +9,7 @@ var passport = require('passport');
 var session = require('express-session');
 
 var app = express();
-require('dotenv').load();
+require('dotenv').load(); // IS THIS WHAT LOADS THE .ENV
 require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI);
