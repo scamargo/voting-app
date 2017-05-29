@@ -44,7 +44,7 @@ module.exports = function (app, passport) {
 
 	app.route('/api/:id')
 		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.github);
+			res.json(req.user.reddit);
 		});
 
 	app.route('/auth/reddit')
