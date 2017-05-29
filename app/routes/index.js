@@ -2,6 +2,7 @@
 
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var crypto = require('crypto');
 
 module.exports = function (app, passport) {
 
@@ -47,13 +48,27 @@ module.exports = function (app, passport) {
 		});
 
 	app.route('/auth/reddit')
-		.get(passport.authenticate('reddit'));
+		.get(function(req, res, next){
+			req.session.state = crypto.randomBytes(32).toString('hex');
+			passport.authenticate('reddit', {
+    			state: req.session.state,
+    			duration: 'permanent',
+			})(req, res, next);
+		});
 
 	app.route('/auth/reddit/callback')
-		.get(passport.authenticate('reddit', {
-			successRedirect: '/',
-			failureRedirect: '/login'
-		}));
+		.get(function(req, res, next){
+			// Check for origin via state token
+			if (req.query.state == req.session.state){
+	    		passport.authenticate('reddit', {
+	    			successRedirect: '/',
+	    			failureRedirect: '/login'
+	    		})(req, res, next);
+			}
+			else {
+	    		next( new Error(403) );
+			}
+		});
 
 	app.route('/api/:id/clicks')
 		.get(isLoggedIn, clickHandler.getClicks)
