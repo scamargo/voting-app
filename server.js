@@ -1,4 +1,6 @@
-//TODO: create .env for other public projects on c9 and use localhost for db
+
+// TODO: test reddit api with curl or jumpman
+// TODO: Update package.json
 
 'use strict';
 
@@ -9,7 +11,7 @@ var passport = require('passport');
 var session = require('express-session');
 
 var app = express();
-require('dotenv').load(); // IS THIS WHAT LOADS THE .ENV
+require('dotenv').load();
 require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI);

@@ -1,6 +1,6 @@
 'use strict';
 
-var GitHubStrategy = require('passport-github').Strategy;
+var RedditStrategy = require('passport-reddit').Strategy;
 var User = require('../models/users');
 var configAuth = require('./auth');
 
@@ -15,14 +15,14 @@ module.exports = function (passport) {
 		});
 	});
 
-	passport.use(new GitHubStrategy({
-		clientID: configAuth.githubAuth.clientID,
-		clientSecret: configAuth.githubAuth.clientSecret,
-		callbackURL: configAuth.githubAuth.callbackURL
+	passport.use(new RedditStrategy({
+		clientID: configAuth.redditAuth.clientID,
+		clientSecret: configAuth.redditAuth.clientSecret,
+		callbackURL: configAuth.redditAuth.callbackURL
 	},
 	function (token, refreshToken, profile, done) {
 		process.nextTick(function () {
-			User.findOne({ 'github.id': profile.id }, function (err, user) {
+			User.findOne({ 'reddit.id': profile.id }, function (err, user) { // try 'redditId' alternatively
 				if (err) {
 					return done(err);
 				}
@@ -32,10 +32,9 @@ module.exports = function (passport) {
 				} else {
 					var newUser = new User();
 
-					newUser.github.id = profile.id;
-					newUser.github.username = profile.username;
-					newUser.github.displayName = profile.displayName;
-					newUser.github.publicRepos = profile._json.public_repos;
+					newUser.reddit.id = profile.id;
+					newUser.reddit.username = profile.name;
+					newUser.reddit.linkKarma = profile.link_karma;
 					newUser.nbrClicks.clicks = 0;
 
 					newUser.save(function (err) {

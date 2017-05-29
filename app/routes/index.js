@@ -46,11 +46,11 @@ module.exports = function (app, passport) {
 			res.json(req.user.github);
 		});
 
-	app.route('/auth/github')
-		.get(passport.authenticate('github'));
+	app.route('/auth/reddit')
+		.get(passport.authenticate('reddit'));
 
-	app.route('/auth/github/callback')
-		.get(passport.authenticate('github', {
+	app.route('/auth/reddit/callback')
+		.get(passport.authenticate('reddit', {
 			successRedirect: '/',
 			failureRedirect: '/login'
 		}));

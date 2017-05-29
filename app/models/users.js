@@ -4,11 +4,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var User = new Schema({
-	github: {
+	reddit: {
 		id: String,
-		displayName: String,
 		username: String,
-      publicRepos: Number
+        linkKarma: Number
 	},
    nbrClicks: {
       clicks: Number
