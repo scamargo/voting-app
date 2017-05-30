@@ -1,20 +1,9 @@
-# Clementine.js FCC Boilerplate
-
-[![Join the chat at https://gitter.im/johnstonbl01/clementinejs](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/johnstonbl01/clementinejs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Voting App for Reddit
 
 ## Overview
 
-Clementine.js is a lightweight boilerplate for fullstack JavaScript development which utilizes MongoDB, Express and Node.js. The boilerplate errs on the side of transparency and simplicity, making it an ideal starting point for beginner and seasoned developers alike. 
+Voting app built with Clementine.js using MongoDB, Express and Node.js, and [Passport](http://passportjs.org/).
 
-The [Free Code Camp](http://www.freecodecamp.com) version of Clementine.js is meant for use when completing projects as part of the FCC curriculum. This version includes GitHub authentication using [Passport](http://passportjs.org/).
-
-## Versions
-
-There are 3 versions of Clementine.js:
-
-- [**Standard**](https://github.com/johnstonbl01/clementinejs): the simplest version of Clementine.js. Intended for those who wish for the smallest and least intrusive footprint OR to implement features on their own.
-- [**Angular**](https://github.com/johnstonbl01/clementinejs-angular): a slightly more complex version of the same application. This version employs the use of AngularJS as the front-end framework.
-- **Free Code Camp (FCC)** (this version): A modified version of the standard boilerplate that is intended for use with the [Free Code Camp](http://freecodecamp.com/) curriculum.
 
 # Quick Start Guide
 
@@ -29,12 +18,6 @@ In order to use Clementine.js, you must have the following installed:
 
 ### Installation & Startup
 
-To install Clementine.js, simply enter the below in the terminal window:
-
-```bash
-$ git clone https://github.com/johnstonbl01/clementinejs-fcc.git your-project
-```
-
 To install the dependencies, enter the following in your terminal:
 
 ```
@@ -42,31 +25,30 @@ $ cd your-project
 $ npm install
 ```
 
-This will install the Clementine.js components into the `your-project` directory.
+### Setup Reddit Authentication
 
-### Setup GitHub Authentication
-
-Please follow [this guide](http://www.clementinejs.com/tutorials/tutorial-passport.html#GitHubAppSetup) to register the application with GitHub and get API keys / secrets.
+Please follow [this guide](https://github.com/reddit/reddit/wiki/OAuth2) to register the application with Reddit and get API keys / secrets.
 
 ### Local Environment Variables
 
 Create a file named `.env` in the root directory. This file should contain:
 
 ```
-GITHUB_KEY=your-client-id-here
-GITHUB_SECRET=your-client-secret-here
-MONGO_URI=mongodb://localhost:27017/clementinejs
+REDDIT_KEY=your-client-id-here
+REDDIT_SECRET=your-client-secret-here
+MONGO_URI=mongodb://localhost:27017/voting-app-db
 PORT=8080
 APP_URL=http://localhost:8080/
 ```
 
 ### Starting the App
 
-To start the app, make sure you're in the project directory and type `node server.js` into the terminal. This will start the Node server and connect to MongoDB.
+To start the app, make sure you're in the project directory and type `node server.js` into the terminal. This will start the Node server and connect to MongoDB. (make sure you have started the mongo database)
 
 You should the following messages within the terminal window:
 
 ```
+Debugger listening on port 15454
 Node.js listening on port 8080...
 ```
 
@@ -78,26 +60,7 @@ If you're using c9.io, please [reference the documentation](http://www.clementin
 
 ## Contributing
 
-This is an open-source project, and contributions are always welcome! To see ways to contribute, please review the [contribution guidelines](http://www.clementinejs.com/developers/contributing.html).
-
-## Documentation
-
-Complete documentation can be [found here](http://www.clementinejs.com).
-
-### Tutorial
-
-You can find a complete step-by-step tutorial on how to create this app from the ground up [here](http://www.clementinejs.com/tutorials/tutorial-passport.html).
-
-## Features
-
-| Features           | Standard  | Angular   | FCC       |
-|:---------          |:--------: |:--------: |:---------:|
-| MongoDB            | _Yes_     | _Yes_     | _Yes_     |
-| Express            | _Yes_     | _Yes_     | _Yes_     |
-| AngularJS (1.x)    | _No_      | _Yes_     | _No_      |
-| Node.js            | _Yes_     | _Yes_     | _Yes_     |
-| Passport           | _No_      | _No_      | _Yes_     |
-| Mongoose           | _No_      | _No_      | _Yes_     |
+This is an open-source project, and contributions are always welcome!
 
 ## License
 

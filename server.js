@@ -1,6 +1,7 @@
-
-// TODO: test reddit api with curl or jumpman
-// TODO: Update package.json
+// TODO: Create model for poll
+// TODO: Add poll to db in association with specific user
+// TODO: Display list of polls associated with user in profile screen
+// TODO: Display poll in polling view screen
 
 'use strict';
 
