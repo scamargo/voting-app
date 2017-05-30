@@ -16,14 +16,7 @@ In order to use Clementine.js, you must have the following installed:
 - [MongoDB](http://www.mongodb.org/)
 - [Git](https://git-scm.com/)
 
-### Installation & Startup
-
-To install the dependencies, enter the following in your terminal:
-
-```
-$ cd your-project
-$ npm install
-```
+## Installation & Startup
 
 ### Setup Reddit Authentication
 
