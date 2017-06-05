@@ -22,7 +22,7 @@ module.exports = function (passport) {
 	},
 	function (token, refreshToken, profile, done) {
 		process.nextTick(function () {
-			User.findOne({ 'reddit.id': profile.id }, function (err, user) { // try 'redditId' alternatively
+			User.findOne({ 'reddit.id': profile.id }, function (err, user) {
 				if (err) {
 					return done(err);
 				}
@@ -36,6 +36,7 @@ module.exports = function (passport) {
 					newUser.reddit.username = profile.name;
 					newUser.reddit.linkKarma = profile.link_karma;
 					newUser.nbrClicks.clicks = 0;
+					newUser.pollsOfUser = [];
 
 					newUser.save(function (err) {
 						if (err) {

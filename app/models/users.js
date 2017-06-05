@@ -11,7 +11,11 @@ var User = new Schema({
 	},
    nbrClicks: {
       clicks: Number
-   }
+   },
+   pollsOfUser: [{ type: Schema.Types.ObjectId, ref: 'Poll' }]
 });
 
 module.exports = mongoose.model('User', User);
+
+//var Users = mongoose.model('User', User);
+//module.exports = Users

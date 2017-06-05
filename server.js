@@ -1,6 +1,6 @@
-// TODO: Create model for poll
-// TODO: Add poll to db in association with specific user
-// TODO: Display list of polls associated with user in profile screen
+// TODO: Display list of polls associated with user in home screen
+// TODO: Create poll editing screen
+// TODO: Add options to polls
 // TODO: Display poll in polling view screen
 
 'use strict';
