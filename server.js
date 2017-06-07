@@ -1,4 +1,5 @@
-// TODO: Display list of polls associated with user in home screen
+// TODO: Design main user screen -- mobile first
+// TODO: Add functionality to delete polls main user screen
 // TODO: Create poll editing screen
 // TODO: Add options to polls
 // TODO: Display poll in polling view screen
@@ -17,6 +18,10 @@ require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
+
+app.get('/jquery/jquery.js', function(req, res) {
+    res.sendFile(__dirname + '/node_modules/jquery/dist/jquery.min.js');
+});
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
