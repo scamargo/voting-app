@@ -2,19 +2,11 @@
 
 (function () {
 
-   var addButton = document.querySelector('.btn-add');
-   var deleteButton = document.querySelector('.btn-delete');
-   var clickNbr = document.querySelector('#click-nbr');
    var questionInput = document.querySelector("#question");
    var apiUrl = appUrl + '/api/:id/clicks';
    var addPollButton = document.querySelector('#add-poll');
    var pollView = document.querySelector('#polls');
    var pollUrl = appUrl + '/api/:id/polls';
-
-   function updateClickCount (data) {
-      var clicksObject = JSON.parse(data);
-      clickNbr.innerHTML = clicksObject.clicks;
-   }
    
    function updatePolls (data) {
       var pollsObject = JSON.parse(data);
@@ -24,29 +16,10 @@
       // Loop through polls data
       for (var key in pollsObject) {
          if (pollsObject.hasOwnProperty(key)) {
-            console.log(key + " -> " + JSON.stringify(pollsObject[key]));
             pollView.append(buildPollsElement(pollsObject[key]));
          }
       }
    }
-
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
-
-   addButton.addEventListener('click', function () {
-
-      ajaxFunctions.ajaxRequest('POST', apiUrl, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
-      });
-
-   }, false);
-
-   deleteButton.addEventListener('click', function () {
-
-      ajaxFunctions.ajaxRequest('DELETE', apiUrl, function () {
-         ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount);
-      });
-
-   }, false);
    
    // POLLS
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', pollUrl, updatePolls));

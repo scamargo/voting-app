@@ -24,9 +24,10 @@ body {
 }
 
 header {
+	background-color: #4C3B4D;
 	color: #00BCD4;
-	height: 56px;
 	margin: 0 0 14px 0;
+	padding: 20px;
 	text-align: center;
 }
 
@@ -104,12 +105,12 @@ img {
 	display: block;
 }
 
-.clementine-text { /* Styling for the Clementine.js text */
+.page-title {
 	padding: 0;
 	margin: -25px 0 0 0;
 	font-weight: 500;
 	font-size: 60px;
-	color: #FFA000;
+	color: #61C9A8;
 }
 
 /****** Click Styling ******/
@@ -147,14 +148,18 @@ img {
 	color: #212121;
 }
 
-#click-nbr {
-	font-weight: 400;
+.poll-detail {
+	display: flex;
+	padding-left: 1em;
+	margin: .2rem 0 0 0;
+	background-color: #FFEEDB;
+	justify-content: space-between;
+	line-height: 10vh;
+	font-size: 1rem;
 }
 
-.poll-detail {
-	padding: 1em 1em 1em 5em;
-	margin: .2rem 0 0 0;
-	background-color: #EE4266;
+.delete {
+	background-color: #A53860;
 }
 
 /****** Profile Styling ******/
@@ -207,4 +212,10 @@ span {
 	color: #FFFFFF;
 	display: inline;
 	margin: 0;
+}
+
+@media (min-width: 768px) {
+	.poll-detail {
+		font-size: 1.5rem;
+	}
 }

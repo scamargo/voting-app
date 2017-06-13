@@ -1,5 +1,3 @@
-// TODO: Design main user screen -- mobile first
-// TODO: Add functionality to delete polls main user screen
 // TODO: Create poll editing screen
 // TODO: Add options to polls
 // TODO: Display poll in polling view screen
