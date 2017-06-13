@@ -1,7 +1,7 @@
 'use strict';
 
-var Users = require('../models/users.js');
-var Polls = require('../models/polls.js');
+var User = require('../models/users.js');
+var Poll = require('../models/polls.js');
 var mongoose = require('mongoose');
 
 
@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 function PollHandler () {
 
 	this.getPolls = function (req, res) {
-		Polls
+		Poll
 			.find({ 'ownerOfPoll': req.user._id })
 			.exec(function (err, result) {
 				if (err) { throw err; }
@@ -19,7 +19,7 @@ function PollHandler () {
 	};
 
 	this.addPoll = function (req, res) {
-	    Users
+	    User
 			.findOne({ 'reddit.id': req.user.reddit.id })
 			.exec(function (err, result) {
 				if (err) { throw err; }
@@ -43,7 +43,7 @@ function PollHandler () {
 
 	this.removePoll = function (req, res) {
 		
-		Polls
+		Poll
 			.remove({ '_id': mongoose.Types.ObjectId(req.query.pollId) },function(err, result){ //undefined??
 		        if (err) return res.status(500).send({err: 'Error: Could not delete poll'});
 		        if(!result) return res.status(400).send({err: 'Poll not deleted from database'});
