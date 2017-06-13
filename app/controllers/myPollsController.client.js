@@ -3,7 +3,6 @@
 (function () {
 
    var questionInput = document.querySelector("#question");
-   var apiUrl = appUrl + '/api/:id/clicks';
    var addPollButton = document.querySelector('#add-poll');
    var pollView = document.querySelector('#polls');
    var pollUrl = appUrl + '/api/:id/polls';
@@ -21,7 +20,6 @@
       }
    }
    
-   // POLLS
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', pollUrl, updatePolls));
    
    addPollButton.addEventListener('click', function () {
@@ -35,7 +33,7 @@
 
    }, false);
    
-   $(document).on('click','.delete', function(){ // TODO: this ain't working
+   $(document).on('click','.delete', function(){
       var urlWithQuery = pollUrl + '?pollId=' + $(this).attr('value');
 
       ajaxFunctions.ajaxRequest('DELETE', urlWithQuery, function () {

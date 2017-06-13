@@ -1,7 +1,6 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
 var crypto = require('crypto');
 
@@ -15,7 +14,6 @@ module.exports = function (app, passport) {
 		}
 	}
 
-	var clickHandler = new ClickHandler();
 	var pollHandler = new PollHandler();
 
 	app.route('/')
@@ -71,11 +69,6 @@ module.exports = function (app, passport) {
 	    		next( new Error(403) );
 			}
 		});
-
-	app.route('/api/:id/clicks')
-		.get(isLoggedIn, clickHandler.getClicks)
-		.post(isLoggedIn, clickHandler.addClick)
-		.delete(isLoggedIn, clickHandler.resetClicks)
 		
 	app.route('/api/:id/polls')
 		.get(isLoggedIn, pollHandler.getPolls)
