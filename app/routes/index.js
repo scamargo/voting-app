@@ -70,6 +70,11 @@ module.exports = function (app, passport) {
 			}
 		});
 		
+	app.route('/new')
+		.get(isLoggedIn, function (req, res) {
+			res.sendFile(path + '/public/editPoll.html');
+		});
+	
 	app.route('/api/:id/polls')
 		.get(isLoggedIn, pollHandler.getPolls)
 		.post(isLoggedIn, pollHandler.addPoll)

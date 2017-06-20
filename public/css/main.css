@@ -121,7 +121,7 @@ img {
 }
 
 .btn {	/* Styling for buttons */
-	margin: 0 8px;
+/*	margin: 0 8px;
 	color: white;
 	background-color: #00BCD4;
 	display: inline-block;
@@ -130,7 +130,7 @@ img {
 	border-radius: 3px;
 	padding: 10px 5px;
 	width: 100px;
-	font-weight: 500;
+	font-weight: 500;*/
 }
 
 .btn:focus {	/* Remove outline when hovering over button */
@@ -144,22 +144,24 @@ img {
 }
 
 .btn-delete {	/* Styling for delete button */
-	background-color: #ECEFF1;
-	color: #212121;
+	background-color: #A53860;
+	border-radius: 0px !important;
 }
 
 .poll-detail {
 	display: flex;
 	padding-left: 1em;
 	margin: .2rem 0 0 0;
-	background-color: #FFEEDB;
+	background-color: #ADA8B6;
 	justify-content: space-between;
 	line-height: 10vh;
 	font-size: 1rem;
 }
 
-.delete {
-	background-color: #A53860;
+/****** Edit Poll Styling ******/
+
+.option {
+	display: block;
 }
 
 /****** Profile Styling ******/

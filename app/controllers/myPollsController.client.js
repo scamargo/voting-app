@@ -1,3 +1,5 @@
+//TODO: debug save button
+
 'use strict';
 
 (function () {
@@ -6,12 +8,14 @@
    var addPollButton = document.querySelector('#add-poll');
    var pollView = document.querySelector('#polls');
    var pollUrl = appUrl + '/api/:id/polls';
+   var pollOptions = document.querySelector('.option');
+   var savePollButton = document.querySelector('#save-poll');
    
    function updatePolls (data) {
       var pollsObject = JSON.parse(data);
       while (pollView.firstChild) {
          pollView.removeChild(pollView.firstChild);
-}
+      }
       // Loop through polls data
       for (var key in pollsObject) {
          if (pollsObject.hasOwnProperty(key)) {
@@ -33,7 +37,7 @@
 
    }, false);
    
-   $(document).on('click','.delete', function(){
+   $(document).on('click','.btn-delete', function(){
       var urlWithQuery = pollUrl + '?pollId=' + $(this).attr('value');
 
       ajaxFunctions.ajaxRequest('DELETE', urlWithQuery, function () {
@@ -49,7 +53,7 @@
       var deleteButton = document.createElement('button');
       item.setAttribute("class","poll-detail");
       item.appendChild(document.createTextNode(pollObj.question)); 
-      deleteButton.setAttribute("class","delete");
+      deleteButton.setAttribute("class","btn btn-delete");
       deleteButton.appendChild(document.createTextNode('delete'));
       deleteButton.setAttribute("value",pollObj._id);
       /*var detail = document.createElement('div');
