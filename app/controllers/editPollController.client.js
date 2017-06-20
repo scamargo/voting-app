@@ -6,7 +6,7 @@
 
    var questionInput = document.querySelector("#question");
    var pollUrl = appUrl + '/api/:id/polls';
-   var pollOptions = document.querySelector('.option');
+   var pollOptions = document.querySelectorAll('.option');
    var savePollButton = document.querySelector('#save-poll');
    
    /*function updatePolls (data) {
@@ -39,8 +39,8 @@
       
       var urlWithQuery = pollUrl + '?question=' + questionInput.value;
       //TODO: loop through options and add them
-      urlWithQuery += '&options[]=' + pollOptions[0];
-      urlWithQuery += '&options[]=' + pollOptions[0];
+      urlWithQuery += '&options[]=' + pollOptions[0].value;
+      urlWithQuery += '&options[]=' + pollOptions[1].value;
 
       ajaxFunctions.ajaxRequest('POST', urlWithQuery, function () {
          
