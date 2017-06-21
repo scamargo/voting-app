@@ -79,7 +79,7 @@ function PollHandler () {
 		        		if (err) return res.status(500).send({err: 'Error: Could not delete poll option'});
 		        		if(!result) return res.status(400).send({err: 'Poll option not deleted from database'});
 		        	})
-		        res.send(result); // TODO: send result once all poll options are deleted
+		        res.send(result); // TODO: send result once all poll options are deleted -- not before
     	});
 	};
 

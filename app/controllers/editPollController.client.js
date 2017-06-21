@@ -44,9 +44,28 @@
 
       ajaxFunctions.ajaxRequest('POST', urlWithQuery, function () {
          
-         //ajaxFunctions.ajaxRequest('GET', pollUrl, updatePolls);
+         //TODO: trigger success message
       });
 
    }, false);
+   
+   $(document).keypress(function(e) {
+       if(e.which == 13) {
+           alert('You pressed enter!');
+           savePoll();
+       }
+   });
+
+   function savePoll() {
+      var urlWithQuery = pollUrl + '?question=' + questionInput.value;
+      //TODO: loop through options and add them
+      urlWithQuery += '&options[]=' + pollOptions[0].value;
+      urlWithQuery += '&options[]=' + pollOptions[1].value;
+
+      ajaxFunctions.ajaxRequest('POST', urlWithQuery, function () {
+         
+         //TODO: trigger success message
+      });
+   }
 
 })();
