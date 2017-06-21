@@ -12,10 +12,10 @@ function PollHandler () {
 	this.getPolls = function (req, res) {
 		Poll
 			.find({ 'ownerOfPoll': req.user._id })
-			//.populate('optionsInPoll') TODO: get options by poll
+			.populate('optionsInPoll')
 			.exec(function (err, result) {
 				if (err) { throw err; }
-
+				
 				res.json(result);
 			});
 	};
@@ -44,6 +44,7 @@ function PollHandler () {
 	    
 	};
 	
+	// TODO: prevent first option from being duplicated
 	function addPollOptions(optionsArr, poll){
 		var pollOption = {};
 		
@@ -53,21 +54,32 @@ function PollHandler () {
 				_poll: poll._id
 			});
 			
-			pollOption.save(function(err) {
-		    	if (err) { throw err; }
-		        console.log('PollOption: '+pollOption.text+' saved' );
-        	});
+			!function(pollOption){ //preserve pollOption within closure
+				pollOption.save(function(err) {
+			    	if (err) { throw err; }
+			    	poll.optionsInPoll.push(pollOption);
+			    	console.log(pollOption.text + ' added to poll')
+			    	poll.save(function(err) {
+			    		if (err) { throw err; }		
+			    	});
+			        console.log('PollOption: '+pollOption.text+' saved' );
+	        	});
+			}(pollOption)
 		}
 	}
 
 	this.removePoll = function (req, res) {
-		
+
 		Poll
-			.remove({ '_id': mongoose.Types.ObjectId(req.query.pollId) },function(err, result){ //undefined??
+			.remove({ '_id': mongoose.Types.ObjectId(req.query.pollId) },function(err, result){
 		        if (err) return res.status(500).send({err: 'Error: Could not delete poll'});
 		        if(!result) return res.status(400).send({err: 'Poll not deleted from database'});
-		        console.log('deleted!!!');
-		        res.send(result); 
+		        PollOption
+		        	.remove({'_poll':mongoose.Types.ObjectId(req.query.pollId)},function(err,result){
+		        		if (err) return res.status(500).send({err: 'Error: Could not delete poll option'});
+		        		if(!result) return res.status(400).send({err: 'Poll option not deleted from database'});
+		        	})
+		        res.send(result); // TODO: send result once all poll options are deleted
     	});
 	};
 
