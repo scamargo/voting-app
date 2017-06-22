@@ -1,4 +1,4 @@
-//TODO: debug save button
+
 
 'use strict';
 
@@ -36,22 +36,11 @@
    }, false);*/
    
    savePollButton.addEventListener('click', function () {
-      
-      var urlWithQuery = pollUrl + '?question=' + questionInput.value;
-      //TODO: loop through options and add them
-      urlWithQuery += '&options[]=' + pollOptions[0].value;
-      urlWithQuery += '&options[]=' + pollOptions[1].value;
-
-      ajaxFunctions.ajaxRequest('POST', urlWithQuery, function () {
-         
-         //TODO: trigger success message
-      });
-
+      savePoll()
    }, false);
    
    $(document).keypress(function(e) {
        if(e.which == 13) {
-           alert('You pressed enter!');
            savePoll();
        }
    });
@@ -62,9 +51,9 @@
       urlWithQuery += '&options[]=' + pollOptions[0].value;
       urlWithQuery += '&options[]=' + pollOptions[1].value;
 
-      ajaxFunctions.ajaxRequest('POST', urlWithQuery, function () {
-         
-         //TODO: trigger success message
+      ajaxFunctions.ajaxRequest('POST', urlWithQuery, function (data) {
+         var pollObject = JSON.parse(data);
+         window.location = appUrl + '/polls/' + pollObject.urlHash;
       });
    }
 

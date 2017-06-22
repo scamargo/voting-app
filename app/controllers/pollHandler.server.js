@@ -1,9 +1,13 @@
+// TODO: then add dynamic route through index.js
+
+
 'use strict';
 
 var User = require('../models/users.js');
 var Poll = require('../models/polls.js');
 var PollOption = require('../models/pollOptions');
 var mongoose = require('mongoose');
+var crypto = require('crypto');
 
 
 
@@ -31,14 +35,15 @@ function PollHandler () {
 			
 				var poll = new Poll({
 					question: req.query.question,
-					ownerOfPoll: user._id
+					ownerOfPoll: user._id,
+					urlHash: crypto.randomBytes(8).toString('hex')
 				});
 				
 	        	poll.save(function(err) {
 		            if (err) { throw err; }
 	                addPollOptions(req.query.options, poll) //TODO: how to check for error;
 	                
-	                res.send('Added poll');
+	                res.json(poll);
         		});
 			});
 	    

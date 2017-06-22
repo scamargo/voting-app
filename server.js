@@ -1,5 +1,6 @@
-// TODO: Create poll editing screen
-// TODO: Add options to polls
+// TODO: create poll url when poll is created
+// TODO: create poll viewing screen
+// TODO: pollEditing: if pollId exists, 'save' does update
 // TODO: Display poll in polling view screen
 
 'use strict';
