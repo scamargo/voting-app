@@ -1,5 +1,3 @@
-// TODO: then add dynamic route through index.js
-
 
 'use strict';
 
@@ -8,8 +6,6 @@ var Poll = require('../models/polls.js');
 var PollOption = require('../models/pollOptions');
 var mongoose = require('mongoose');
 var crypto = require('crypto');
-
-
 
 function PollHandler () {
 

@@ -37,11 +37,6 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/profile.html');
 		});
 
-	app.route('/api/:id')
-		.get(isLoggedIn, function (req, res) {
-			res.json(req.user.reddit);
-		});
-
 	app.route('/auth/reddit')
 		.get(function(req, res, next){
 			req.session.state = crypto.randomBytes(32).toString('hex');
@@ -64,6 +59,11 @@ module.exports = function (app, passport) {
 	    		next( new Error(403) );
 			}
 		});
+	
+	app.route('/mypolls')
+		.get(isLoggedIn, function (req, res) {
+			res.sendFile(path + '/public/myPolls.html');
+		});	
 		
 	app.route('/new')
 		.get(isLoggedIn, function (req, res) {
@@ -73,6 +73,12 @@ module.exports = function (app, passport) {
 	app.route('/polls/:hash')
 		.get(function (req, res) {
 			res.sendFile(path + '/public/viewPoll.html');
+		});
+	
+	// API CALLS	
+	app.route('/api/:id')
+		.get(isLoggedIn, function (req, res) {
+			res.json(req.user.reddit);
 		});
 	
 	app.route('/api/:id/polls')

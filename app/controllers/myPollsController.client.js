@@ -1,15 +1,10 @@
-//TODO: debug save button
 
 'use strict';
 
 (function () {
 
-   var questionInput = document.querySelector("#question");
-   var addPollButton = document.querySelector('#add-poll');
    var pollView = document.querySelector('#polls');
    var pollUrl = appUrl + '/api/:id/polls';
-   var pollOptions = document.querySelector('.option');
-   var savePollButton = document.querySelector('#save-poll');
    
    function updatePolls (data) {
       var pollsObject = JSON.parse(data);
@@ -25,17 +20,6 @@
    }
    
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', pollUrl, updatePolls));
-   
-   addPollButton.addEventListener('click', function () {
-      
-      var urlWithQuery = pollUrl + '?question=' + questionInput.value;
-
-      ajaxFunctions.ajaxRequest('POST', urlWithQuery, function () {
-         
-         ajaxFunctions.ajaxRequest('GET', pollUrl, updatePolls);
-      });
-
-   }, false);
    
    $(document).on('click','.btn-delete', function(){
       var urlWithQuery = pollUrl + '?pollId=' + $(this).attr('value');
