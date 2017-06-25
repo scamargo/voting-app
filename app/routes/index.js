@@ -75,9 +75,9 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/viewPoll.html');
 		});*/
 		
-	app.route('/polls/:hash')
+	app.route('/polls/:hash') //TODO: send poll object with viewPoll template
 		.get(function (req, res) {
-			res.render('layouts/viewPoll', { title: 'Hey', urlHash: req.params.hash })
+			pollHandler.renderPoll(req,res);
 		});
 	
 	// API CALLS
@@ -89,8 +89,8 @@ module.exports = function (app, passport) {
 	app.route('/api/:id/polls')
 		.get(isLoggedIn, pollHandler.getPolls)
 		.post(isLoggedIn, pollHandler.addPoll)
-		.delete(isLoggedIn, pollHandler.removePoll)
+		.delete(isLoggedIn, pollHandler.removePoll);
 
-	app.route('/api/:id/poll')
-		.get(pollHandler.getPoll);
+	/*app.route('/api/:id/poll')
+		.get(isLoggedIn, pollHandler.getPoll);*/
 };

@@ -20,15 +20,15 @@ function PollHandler () {
 			});
 	};
 	
-	this.getPoll = function (req, res) {
+	this.renderPoll = function(req, res) {
 		Poll
-			.findOne({ 'urlHash': req.user._id })
+			.findOne({ 'urlHash': req.params.hash })
 			.populate('optionsInPoll')
 			.exec(function (err, result) {
 				if (err) { throw err; }
 				
-				res.json(result);
-			});
+				res.render('viewPoll', { title: 'Hey', question: JSON.stringify(result) });
+			});	
 	};
 
 	this.addPoll = function (req, res) {
