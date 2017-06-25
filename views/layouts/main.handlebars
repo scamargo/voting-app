@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Example App</title>
+	<title>Polling for Reddit</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
 <body>
-
+    <div id="header">
+        {{#if username}}
+        <p>Welcome, {{ username }}!</p>
+        {{/if}}
+        <a class="menu" href="/">Home</a>
+        {{#if username}}
+        <p>|</p>
+        <a class="menu" href="/mypolls">My Polls</a>
+        <p>|</p>
+        <a class="menu" href="/new">New Poll</a>
+        <p>|</p>
+        <a class="menu" href="/profile">Profile</a>
+        <p>|</p>
+        <a class="menu" href="/logout">Logout</a>
+        {{else}}
+        <p>|</p>
+        <a class="menu" href="/login">Login</a>
+        {{/if}}
+    </div>
+    
     {{{body}}}
 
 </body>

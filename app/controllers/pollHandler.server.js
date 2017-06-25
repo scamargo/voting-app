@@ -27,7 +27,23 @@ function PollHandler () {
 			.exec(function (err, result) {
 				if (err) { throw err; }
 				
-				res.render('viewPoll', { title: 'Hey', question: JSON.stringify(result) });
+				if(req.user)
+					res.render('viewPoll', { poll: result, username: req.user.reddit.username });
+				else
+					res.render('viewPoll', { poll: result });
+			});	
+	};
+	
+	this.renderAllPolls = function(req, res) {
+		Poll
+			.find()
+			.exec(function (err, result) {
+				if (err) { throw err; }
+				
+				if(req.user)
+					res.render('home', { polls: result, username: req.user.reddit.username });
+				else
+					res.render('home', { polls: result, poll: result });
 			});	
 	};
 

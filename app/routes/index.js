@@ -15,10 +15,10 @@ module.exports = function (app, passport) {
 	}
 
 	var pollHandler = new PollHandler();
-
+		
 	app.route('/')
-		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/index.html');
+		.get(function (req, res) {
+			pollHandler.renderAllPolls(req,res);
 		});
 
 	app.route('/login')
@@ -29,7 +29,7 @@ module.exports = function (app, passport) {
 	app.route('/logout')
 		.get(function (req, res) {
 			req.logout();
-			res.redirect('/login');
+			res.redirect('/');
 		});
 
 	app.route('/profile')
@@ -70,12 +70,7 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/createPoll.html');
 		});
 		
-	/*app.route('/polls/:hash')
-		.get(function (req, res) {
-			res.sendFile(path + '/public/viewPoll.html');
-		});*/
-		
-	app.route('/polls/:hash') //TODO: send poll object with viewPoll template
+	app.route('/polls/:hash')
 		.get(function (req, res) {
 			pollHandler.renderPoll(req,res);
 		});
@@ -91,6 +86,4 @@ module.exports = function (app, passport) {
 		.post(isLoggedIn, pollHandler.addPoll)
 		.delete(isLoggedIn, pollHandler.removePoll);
 
-	/*app.route('/api/:id/poll')
-		.get(isLoggedIn, pollHandler.getPoll);*/
 };

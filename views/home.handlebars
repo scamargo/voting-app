@@ -1,1 +1,8 @@
-<h1>Example App: Home</h1>
+<div class='container-fluid'>
+<p class="page-title">All Polls</p>
+{{#each polls}}
+    <a href='polls/{{ this.urlHash }}'>
+        <div class='poll-detail'>{{ this.question }}</div>
+    </a>
+{{/each}}   
+</div>

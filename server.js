@@ -1,4 +1,4 @@
-// TODO: fill poll viewing screen with poll data
+// TODO: bug fix - duplicate options being added to polls
 // TODO: adjust model to capture user votes -- and only let them vote once per poll
 // TODO: pollEditing: if pollId exists, 'save' does update
 // TODO: Display poll in polling view screen
