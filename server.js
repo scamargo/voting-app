@@ -1,6 +1,5 @@
-// TODO: create consistent header across pages with 'My Polls','New',and 'Home'
-// TODO: create poll url when poll is created
-// TODO: create poll viewing screen
+// TODO: fill poll viewing screen with poll data
+// TODO: adjust model to capture user votes -- and only let them vote once per poll
 // TODO: pollEditing: if pollId exists, 'save' does update
 // TODO: Display poll in polling view screen
 
@@ -11,6 +10,7 @@ var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
+var exphbs  = require('express-handlebars');
 
 var app = express();
 require('dotenv').load();
@@ -26,6 +26,11 @@ app.get('/jquery/jquery.js', function(req, res) {
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
+
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+//app.set('views', __dirname+'/views')
+app.set('view engine', 'handlebars')
 
 app.use(session({
 	secret: 'secretClementine',

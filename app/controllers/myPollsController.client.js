@@ -31,12 +31,16 @@
    });
    
    function buildPollsElement(pollObj) {
-
-      var link = document.createElement('a'); // TODO: give link href
+      
       var item = document.createElement('div');
+      var link = document.createElement('a');
       var deleteButton = document.createElement('button');
+      
       item.setAttribute("class","poll-detail");
-      item.appendChild(document.createTextNode(pollObj.question)); 
+      
+      link.setAttribute("href","polls/"+pollObj.urlHash); // TODO: make this fill remaining space in item with flexbox
+      link.appendChild(document.createTextNode(pollObj.question)); 
+      
       deleteButton.setAttribute("class","btn btn-delete");
       deleteButton.appendChild(document.createTextNode('delete'));
       deleteButton.setAttribute("value",pollObj._id);
@@ -75,9 +79,10 @@
       }
     
       item.appendChild(detail);*/
+      item.appendChild(link);
       item.appendChild(deleteButton);
-      link.appendChild(item);
-      return link;
+      
+      return item;
    } //buildChannelElement
 
 })();

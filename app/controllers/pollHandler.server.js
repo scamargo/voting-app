@@ -19,6 +19,17 @@ function PollHandler () {
 				res.json(result);
 			});
 	};
+	
+	this.getPoll = function (req, res) {
+		Poll
+			.findOne({ 'urlHash': req.user._id })
+			.populate('optionsInPoll')
+			.exec(function (err, result) {
+				if (err) { throw err; }
+				
+				res.json(result);
+			});
+	};
 
 	this.addPoll = function (req, res) {
 	    User

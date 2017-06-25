@@ -70,12 +70,17 @@ module.exports = function (app, passport) {
 			res.sendFile(path + '/public/createPoll.html');
 		});
 		
-	app.route('/polls/:hash')
+	/*app.route('/polls/:hash')
 		.get(function (req, res) {
 			res.sendFile(path + '/public/viewPoll.html');
+		});*/
+		
+	app.route('/polls/:hash')
+		.get(function (req, res) {
+			res.render('layouts/viewPoll', { title: 'Hey', urlHash: req.params.hash })
 		});
 	
-	// API CALLS	
+	// API CALLS
 	app.route('/api/:id')
 		.get(isLoggedIn, function (req, res) {
 			res.json(req.user.reddit);
@@ -85,4 +90,7 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, pollHandler.getPolls)
 		.post(isLoggedIn, pollHandler.addPoll)
 		.delete(isLoggedIn, pollHandler.removePoll)
+
+	app.route('/api/:id/poll')
+		.get(pollHandler.getPoll);
 };
