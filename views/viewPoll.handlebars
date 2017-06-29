@@ -1,7 +1,9 @@
 <div class="container-fluid">
     <p class='page-title'>{{poll.question}}</p>
-    <div id='pollObject' value='{{ poll }}'></div>
+    <div id='pollObject' value='{{ poll._id }}'></div>
+    
     {{#if username}}
+    {{#unless userVoteCount }}
     <div id='voting-options'>
         <select id="options">
         {{#each poll.optionsInPoll}}
@@ -10,7 +12,10 @@
         </select>
         <button id='submitVote'>Submit Vote</button>
     </div>
+    {{/unless}}
     {{/if}}
+    
+    <br><br>
     <ul id='voteCount'>
     {{#each poll.optionsInPoll}}
         <li>{{this.text}}: {{this.voteCount}}</li>

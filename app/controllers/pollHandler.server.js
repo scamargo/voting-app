@@ -21,6 +21,33 @@ function PollHandler () {
 			});
 	};
 	
+	this.getPollById = function(req, res) {
+		Poll
+			.findOne({ _id: req.query.pollId })
+			.populate('optionsInPoll')
+			.exec(function (err, result) {
+				if (err) { throw err; }
+				
+				var c = 0;
+				for(var i=0;i<result.optionsInPoll.length;i++){
+					(function(i) {
+					Vote.find({"_pollOption":result.optionsInPoll[i]})
+						.count(function(err,data){
+							if(err) { throw err; }
+							
+							result.optionsInPoll[i].voteCount = data;
+
+							c++;
+							if(c == result.optionsInPoll.length) {
+
+								res.json(result);
+							}
+						});
+					})(i);
+				}
+			});	
+	};
+	
 	this.renderPoll = function(req, res) {
 		Poll
 			.findOne({ 'urlHash': req.params.hash })
@@ -39,16 +66,27 @@ function PollHandler () {
 
 							c++;
 							if(c == result.optionsInPoll.length) {
-								if(req.user)
-									res.render('viewPoll', { poll: result, username: req.user.reddit.username });
+								if(req.user) {
+								    Vote
+								        .find({ '_voter': req.user._id, '_poll': result._id})
+							            .count(function(err,count){
+							                if(err) { throw err; }
+							
+							                res.render('viewPoll', { poll: result, username: req.user.reddit.username, userVoteCount: count });
+							            });
+								}
 								else
-									res.render('viewPoll', { poll: result });	
+								{
+									res.render('viewPoll', { poll: result });
+								}
 							}
 						});
 					})(i);
 				}
 			});	
 	};
+	
+	
 	
 	this.renderAllPolls = function(req, res) {
 		Poll

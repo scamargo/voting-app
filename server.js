@@ -1,6 +1,4 @@
-// TODO: display voting totals for each option
-// TODO: only let user vote once per polls (on API side) & client-side
-// TODO: Display poll in polling view screen
+// TODO: display polls w/ amCharts
 // TODO: Redo myPolls w/ Handlebars
 
 'use strict';

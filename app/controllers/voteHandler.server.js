@@ -9,7 +9,7 @@ var crypto = require('crypto');
 
 function VoteHandler () {
 
-	this.getVotes = function (req, res) {
+	/*this.getVotes = function (req, res) {
 		Vote
 			.find({ '_pollOptionId': req.query.optionId })
 			.count(function(err, count){
@@ -17,7 +17,7 @@ function VoteHandler () {
 			    // TODO: send back poll option ID with data
 			    res.json(count);
 			});
-	};
+	};*/
 
 	this.addVote = function (req, res) { // TODO: validate user hasn't already voted in this poll
 	    User
@@ -43,6 +43,20 @@ function VoteHandler () {
 		            });
         		});
 			});
+	};
+	
+	this.hasNotVoted = function(req, res, next) {
+	    Vote
+	        .find({ '_voter': req.user._id, '_poll': req.query.pollId})
+            .count(function(err,count){
+                if(err) { throw err; }
+
+                if (count < 1) {
+			        return next();
+		        } else {
+			        res.send('Cannot vote in same poll twice');
+		        }
+            });
 	};
 
 	/*this.removePoll = function (req, res) {
