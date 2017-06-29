@@ -2,6 +2,7 @@
 
 var path = process.cwd();
 var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
+var VoteHandler = require(path + '/app/controllers/voteHandler.server.js')
 var crypto = require('crypto');
 
 module.exports = function (app, passport) {
@@ -15,6 +16,7 @@ module.exports = function (app, passport) {
 	}
 
 	var pollHandler = new PollHandler();
+	var voteHandler = new VoteHandler();
 		
 	app.route('/')
 		.get(function (req, res) {
@@ -85,5 +87,10 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, pollHandler.getPolls)
 		.post(isLoggedIn, pollHandler.addPoll)
 		.delete(isLoggedIn, pollHandler.removePoll);
+		
+	app.route('/api/:id/votes')
+		.get(voteHandler.getVotes)
+		.post(isLoggedIn, voteHandler.addVote); // Respond with error when user is not authenticated
+		//.delete(isLoggedIn, pollHandler.removePoll);
 
 };

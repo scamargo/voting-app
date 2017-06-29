@@ -25,10 +25,10 @@
       urlWithQuery += '&options[]=' + pollOptions[0].value;
       urlWithQuery += '&options[]=' + pollOptions[1].value;
 
-      ajaxFunctions.ajaxRequest('POST', urlWithQuery, function (data) {
+      ajaxFunctions.ready(ajaxFunctions.ajaxRequest('POST', urlWithQuery, function (data) {
          var pollObject = JSON.parse(data);
          window.location = appUrl + '/polls/' + pollObject.urlHash;
-      });
+      }));
    }
 
 })();

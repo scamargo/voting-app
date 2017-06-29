@@ -1,7 +1,7 @@
-// TODO: bug fix - duplicate options being added to polls
-// TODO: adjust model to capture user votes -- and only let them vote once per poll
-// TODO: pollEditing: if pollId exists, 'save' does update
+// TODO: display voting totals for each option
+// TODO: only let user vote once per polls (on API side) & client-side
 // TODO: Display poll in polling view screen
+// TODO: Redo myPolls w/ Handlebars
 
 'use strict';
 

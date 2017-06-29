@@ -3,7 +3,8 @@
 
 var User = require('../models/users.js');
 var Poll = require('../models/polls.js');
-var PollOption = require('../models/pollOptions');
+var PollOption = require('../models/pollOptions.js');
+var Vote = require('../models/votes.js')
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 
@@ -27,10 +28,25 @@ function PollHandler () {
 			.exec(function (err, result) {
 				if (err) { throw err; }
 				
-				if(req.user)
-					res.render('viewPoll', { poll: result, username: req.user.reddit.username });
-				else
-					res.render('viewPoll', { poll: result });
+				var c = 0;
+				for(var i=0;i<result.optionsInPoll.length;i++){
+					(function(i) {
+					Vote.find({"_pollOption":result.optionsInPoll[i]})
+						.count(function(err,data){
+							if(err) { throw err; }
+							
+							result.optionsInPoll[i].voteCount = data;
+
+							c++;
+							if(c == result.optionsInPoll.length) {
+								if(req.user)
+									res.render('viewPoll', { poll: result, username: req.user.reddit.username });
+								else
+									res.render('viewPoll', { poll: result });	
+							}
+						});
+					})(i);
+				}
 			});	
 	};
 	
@@ -72,7 +88,6 @@ function PollHandler () {
 	    
 	};
 	
-	// TODO: prevent first option from being duplicated
 	function addPollOptions(optionsArr, poll){
 		var pollOption = {};
 		
@@ -82,18 +97,16 @@ function PollHandler () {
 				_poll: poll._id
 			});
 			
-			!function(pollOption){ //preserve pollOption within closure
-				pollOption.save(function(err) {
-			    	if (err) { throw err; }
-			    	poll.optionsInPoll.push(pollOption);
-			    	console.log(pollOption.text + ' added to poll')
-			    	poll.save(function(err) {
-			    		if (err) { throw err; }		
-			    	});
-			        console.log('PollOption: '+pollOption.text+' saved' );
-	        	});
-			}(pollOption)
+			poll.optionsInPoll.push(pollOption);
+			
+			pollOption.save(function(err) {
+		    	if (err) { throw err; }
+        	});
 		}
+		
+		poll.save(function(err){
+			if (err) { throw err; }
+		});
 	}
 
 	this.removePoll = function (req, res) {

@@ -1,8 +1,19 @@
-<div class="entry">
-    <h1>{{poll.question}}</h1>
-    <ul>
+<div class="container-fluid">
+    <p class='page-title'>{{poll.question}}</p>
+    <div id='pollObject' value='{{ poll }}'></div>
+    {{#if username}}
+    <div id='voting-options'>
+        <select id="options">
+        {{#each poll.optionsInPoll}}
+            <option value='?pollId={{ ../poll._id }}&pollOptionId={{ this._id }}'>{{this.text}}</option>
+        {{/each}}
+        </select>
+        <button id='submitVote'>Submit Vote</button>
+    </div>
+    {{/if}}
+    <ul id='voteCount'>
     {{#each poll.optionsInPoll}}
-    <li>{{this.text}}</li>
+        <li>{{this.text}}: {{this.voteCount}}</li>
     {{/each}}
     </ul>
 </div>
