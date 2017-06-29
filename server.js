@@ -1,5 +1,8 @@
 // TODO: display polls w/ amCharts
 // TODO: Redo myPolls w/ Handlebars
+// TODO: feature to add + remove pollOptions from new poll page 
+// TODO: when deleting polls, delete relevant votes -- look up cascading delete
+// TODO: allow users to insert their own poll option from voting page
 
 'use strict';
 

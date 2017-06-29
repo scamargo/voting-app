@@ -9,10 +9,8 @@
 </head>
 <body>
     <div id="header">
-        {{#if username}}
-        <p>Welcome, {{ username }}!</p>
-        {{/if}}
         <a class="menu" href="/">Home</a>
+        
         {{#if username}}
         <p>|</p>
         <a class="menu" href="/mypolls">My Polls</a>
@@ -22,6 +20,7 @@
         <a class="menu" href="/profile">Profile</a>
         <p>|</p>
         <a class="menu" href="/logout">Logout</a>
+        <p style='display:block'>Welcome, {{ username }}!</p>
         {{else}}
         <p>|</p>
         <a class="menu" href="/login">Login</a>

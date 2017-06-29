@@ -2,6 +2,12 @@
     <p class='page-title'>{{poll.question}}</p>
     <div id='pollObject' value='{{ poll._id }}'></div>
     
+    <ul id='voteCount'>
+    {{#each poll.optionsInPoll}}
+        <li>{{this.text}}: {{this.voteCount}}</li>
+    {{/each}}
+    </ul>
+    <br><br>
     {{#if username}}
     {{#unless userVoteCount }}
     <div id='voting-options'>
@@ -14,13 +20,7 @@
     </div>
     {{/unless}}
     {{/if}}
-    
-    <br><br>
-    <ul id='voteCount'>
-    {{#each poll.optionsInPoll}}
-        <li>{{this.text}}: {{this.voteCount}}</li>
-    {{/each}}
-    </ul>
+
 </div>
 <script type="text/javascript" src="/common/ajax-functions.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
