@@ -1,4 +1,3 @@
-// TODO: display polls w/ amCharts
 // TODO: Redo myPolls w/ Handlebars
 // TODO: feature to add + remove pollOptions from new poll page 
 // TODO: when deleting polls, delete relevant votes -- look up cascading delete
@@ -30,7 +29,6 @@ app.use('/common', express.static(process.cwd() + '/app/common'));
 
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-//app.set('views', __dirname+'/views')
 app.set('view engine', 'handlebars')
 
 app.use(session({

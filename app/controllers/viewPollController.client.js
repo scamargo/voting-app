@@ -15,17 +15,16 @@ function updateVotes() {
 
             // loop through options in data and update UI
             var pollObject = JSON.parse(data);
-            // remove all list items in <ul>
-            while (voteCountView.firstChild) {
-                voteCountView.removeChild(voteCountView.firstChild);
-            }
-            // add a list item for each pollOption
-            var options = pollObject.optionsInPoll;
-            for(var i=0;i< options.length;i++) {
-                var item = document.createElement('li');
-                item.appendChild(document.createTextNode(options[i].text +': '+options[i].voteCount));
-                voteCountView.append(item);    
-            }
+            
+            AmCharts.makeChart( "chartdiv", {
+              "type": "serial",
+              "dataProvider": pollObject.optionsInPoll,
+              "categoryField": "text",
+              "graphs": [ {
+                "valueField": "voteCount",
+                "type": "column"
+              } ]
+            } );
         }));     
 }
 

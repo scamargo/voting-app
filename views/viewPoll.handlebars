@@ -2,11 +2,6 @@
     <p class='page-title'>{{poll.question}}</p>
     <div id='pollObject' value='{{ poll._id }}'></div>
     
-    <ul id='voteCount'>
-    {{#each poll.optionsInPoll}}
-        <li>{{this.text}}: {{this.voteCount}}</li>
-    {{/each}}
-    </ul>
     <br><br>
     {{#if username}}
     {{#unless userVoteCount }}
@@ -20,9 +15,13 @@
     </div>
     {{/unless}}
     {{/if}}
+    
+    <div id="chartdiv" style="width: 640px; height: 400px;"></div>
 
 </div>
 <script type="text/javascript" src="/common/ajax-functions.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/controllers/viewPollController.client.js"></script>
