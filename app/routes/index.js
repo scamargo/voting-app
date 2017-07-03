@@ -64,8 +64,8 @@ module.exports = function (app, passport) {
 	
 	app.route('/mypolls')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/myPolls.html');
-		});	
+			pollHandler.renderMyPolls(req,res);
+		});
 		
 	app.route('/new')
 		.get(isLoggedIn, function (req, res) {

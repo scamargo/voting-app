@@ -48,7 +48,7 @@ function PollHandler () {
 			});	
 	};
 	
-	this.renderPoll = function(req, res) {
+	this.renderPoll = function(req, res) { 
 		Poll
 			.findOne({ 'urlHash': req.params.hash })
 			.populate('optionsInPoll')
@@ -98,6 +98,16 @@ function PollHandler () {
 					res.render('home', { polls: result, username: req.user.reddit.username });
 				else
 					res.render('home', { polls: result, poll: result });
+			});	
+	};
+	
+	this.renderMyPolls = function(req, res) {
+		Poll
+			.find({ 'ownerOfPoll': req.user._id })
+			.exec(function (err, result) {
+				if (err) { throw err; }
+				
+				res.render('myPolls', { polls: result, username: req.user.reddit.username });
 			});	
 	};
 

@@ -59,21 +59,6 @@ function VoteHandler () {
             });
 	};
 
-	/*this.removePoll = function (req, res) {
-
-		Poll
-			.remove({ '_id': mongoose.Types.ObjectId(req.query.pollId) },function(err, result){
-		        if (err) return res.status(500).send({err: 'Error: Could not delete poll'});
-		        if(!result) return res.status(400).send({err: 'Poll not deleted from database'});
-		        PollOption
-		        	.remove({'_poll':mongoose.Types.ObjectId(req.query.pollId)},function(err,result){
-		        		if (err) return res.status(500).send({err: 'Error: Could not delete poll option'});
-		        		if(!result) return res.status(400).send({err: 'Poll option not deleted from database'});
-		        	})
-		        res.send(result); // TODO: send result once all poll options are deleted -- not before
-    	});
-	};*/
-
 }
 
 module.exports = VoteHandler;
