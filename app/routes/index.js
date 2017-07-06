@@ -74,7 +74,7 @@ module.exports = function (app, passport) {
 		
 	app.route('/new')
 		.get(isLoggedIn, function (req, res) {
-			res.sendFile(path + '/public/createPoll.html');
+			res.render('createPollPage');
 		});
 		
 	app.route('/polls/:hash')
