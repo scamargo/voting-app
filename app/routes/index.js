@@ -64,7 +64,12 @@ module.exports = function (app, passport) {
 	
 	app.route('/mypolls')
 		.get(isLoggedIn, function (req, res) {
-			pollHandler.renderMyPolls(req,res);
+			pollHandler.renderMyPollsPage(req,res);
+		});
+		
+	app.route('/rendermypolls')
+		.get(isLoggedIn, function(req, res) {
+			pollHandler.renderMyPolls(req, res);	
 		});
 		
 	app.route('/new')
@@ -93,9 +98,7 @@ module.exports = function (app, passport) {
 	}
 		
 	app.route('/api/:id/votes')
-		//.get(voteHandler.getVotes)
 		.post(isLoggedIn, hasNotVoted, voteHandler.addVote); // Respond with error when user is not authenticated
-		//.delete(isLoggedIn, pollHandler.removePoll);
 		
 	app.get('/api/:id/poll', function(req, res) {
 		pollHandler.getPollById(req,res);

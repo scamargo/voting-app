@@ -101,13 +101,23 @@ function PollHandler () {
 			});	
 	};
 	
+	this.renderMyPollsPage = function(req, res) {
+		Poll
+			.find({ 'ownerOfPoll': req.user._id })
+			.exec(function (err, result) {
+				if (err) { throw err; }
+				
+				res.render('myPollsPage', { polls: result, username: req.user.reddit.username });
+			});	
+	};
+	
 	this.renderMyPolls = function(req, res) {
 		Poll
 			.find({ 'ownerOfPoll': req.user._id })
 			.exec(function (err, result) {
 				if (err) { throw err; }
 				
-				res.render('myPolls', { polls: result, username: req.user.reddit.username });
+				res.render('myPolls', { layout: false, polls: result });
 			});	
 	};
 

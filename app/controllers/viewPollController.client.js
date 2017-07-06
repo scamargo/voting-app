@@ -30,6 +30,13 @@ function updateVotes() {
 
 updateVotes();
 
+function getTemplate(name) {
+    
+  return $.get('/'+name).then(function(src) { // TODO: update get path
+     return Handlebars.compile(src);
+  });
+}
+
 $('#submitVote').click(function(){
     
     var urlWithQuery = voteUrl + $('#options').val();

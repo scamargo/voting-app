@@ -1,17 +1,6 @@
-
-<div class="container-fluid">
-	<p class="page-title">My Polls</p>
-	<a href='/new'><button class="btn">Add New</button></a>
-	<br><br>
-	<div id="polls">
-	{{#each polls}}
-	    <a href='polls/{{ this.urlHash }}'>
-	        <div class='poll-detail'>{{ this.question }}<button class='btn btn-delete' value='{{ this._id }}'>Delete</button></div>
-	    </a>
-	{{/each}}
+{{#each polls}}
+	<div class='poll-detail'>
+		<a href='polls/{{ this.urlHash }}'>{{ this.question }}</a>
+		<button class='btn btn-delete' value='{{ this._id }}'>Delete</button>
 	</div>
-</div>
-<script type="text/javascript" src="/common/ajax-functions.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/controllers/myPollsController.client.js"></script>
+{{/each}}
