@@ -1,5 +1,3 @@
-// TODO: use same version of jquery on front-end & back-end
-// TODO: dynamically load handlebars templates with AJAX
 // TODO: feature to add + remove pollOptions from new poll page 
 // TODO: when deleting polls, delete relevant votes -- look up cascading delete
 // TODO: allow users to insert their own poll option from voting page
