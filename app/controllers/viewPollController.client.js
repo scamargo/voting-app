@@ -13,7 +13,6 @@ function updateVotes() {
         var urlWithQuery = pollUrl + '?pollId=' + pollId;
         ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', urlWithQuery, function(data){
 
-            // loop through options in data and update UI
             var pollObject = JSON.parse(data);
             
             AmCharts.makeChart( "chartdiv", {
@@ -26,15 +25,6 @@ function updateVotes() {
               } ]
             } );
         }));     
-}
-
-updateVotes();
-
-function getTemplate(name) {
-    
-  return $.get('/'+name).then(function(src) { // TODO: update get path
-     return Handlebars.compile(src);
-  });
 }
 
 $('#submitVote').click(function(){

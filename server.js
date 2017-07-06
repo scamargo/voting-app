@@ -1,6 +1,7 @@
 // TODO: feature to add + remove pollOptions from new poll page 
 // TODO: when deleting polls, delete relevant votes -- look up cascading delete
 // TODO: allow users to insert their own poll option from voting page
+// TODO: use socket.io to update polling results as other users are voting
 
 'use strict';
 

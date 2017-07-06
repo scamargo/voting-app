@@ -12,7 +12,7 @@
          pollView.removeChild(pollView.firstChild);
       }
       
-      getTemplate('renderMyPolls').done(function(template){
+      handlebarsHelpers.getTemplate('renderMyPolls').done(function(template){
          $("#polls").append(template);
       });
    }
@@ -24,11 +24,5 @@
          updatePolls();
       });
    });
-   
-   function getTemplate(name) {
-      return $.get('/'+name).then(function(src) {
-         return Handlebars.compile(src);
-      });
-   }
 
 })();
