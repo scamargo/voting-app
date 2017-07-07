@@ -1,4 +1,3 @@
-// TODO: hotfix: chart not showing up until vote is submitted
 // TODO: allow users to insert their own poll option from voting page
 // TODO: use socket.io to update polling results as other users are voting
 

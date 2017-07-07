@@ -27,6 +27,8 @@ function updateVotes() {
         }));     
 }
 
+updateVotes();
+
 $('#submitVote').click(function(){
     
     var urlWithQuery = voteUrl + $('#options').val();
