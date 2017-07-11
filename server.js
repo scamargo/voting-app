@@ -1,5 +1,4 @@
-// TODO: hotfix: newpoll page showing limited header
-// TODO: allow users to insert their own poll option from voting page
+// TODO: allow sharing on reddit
 // TODO: use socket.io to update polling results as other users are voting
 
 'use strict';

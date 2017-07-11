@@ -19,13 +19,12 @@ function VoteHandler () {
 			});
 	};*/
 
-	this.addVote = function (req, res) { // TODO: validate user hasn't already voted in this poll
+	this.addVote = function (req, res) {
 	    User
 			.findOne({ 'reddit.id': req.user.reddit.id })
 			.exec(function (err, result) {
 				if (err) { throw err; }
 
-				//result.pollsOfUser || (result.pollsOfUser = [])
 				var user = result;
 			
 				var vote = new Vote({

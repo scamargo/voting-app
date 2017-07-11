@@ -6,11 +6,10 @@
     {{#if username}}
     {{#unless userVoteCount }}
     <div id='voting-options'>
-        <select id="options">
         {{#each poll.optionsInPoll}}
-            <option value='?pollId={{ ../poll._id }}&pollOptionId={{ this._id }}'>{{this.text}}</option>
+            <input type="radio" name="option" value='?pollId={{ ../poll._id }}&pollOptionId={{ this._id }}'>{{this.text}}<br>
         {{/each}}
-        </select>
+        <input type="radio" name="option" value='?pollId={{ poll._id }}'>Other <input type="text" id="otherOption" /><br>
         <button id='submitVote'>Submit Vote</button>
     </div>
     {{/unless}}

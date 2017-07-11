@@ -186,6 +186,34 @@ function PollHandler () {
 		        res.send(result); // TODO: send result once all related data is deleted -- not before
     	});
 	};
+	
+	this.updatePoll = function (req, res, next) {
+	    Poll
+			.findOne({ '_id': req.query.pollId })
+			.exec(function (err, result) {
+				if (err) { throw err; }
+
+				var poll = result;
+			
+				var pollOption = new PollOption({
+					text: req.query.option,
+					_poll: poll._id,
+				});
+				
+				poll.optionsInPoll.push(pollOption);
+				
+	        	pollOption.save(function(err, pollOption) {
+		            if (err) { throw err; }
+		            req.query.pollOptionId = pollOption._id.toString();
+	                
+	                poll.save(function(err, poll) {
+	                	if (err) { throw err; }
+	                	return next();
+	                });
+        		});
+			});
+	    
+	};
 
 }
 
