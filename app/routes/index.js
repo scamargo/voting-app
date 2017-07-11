@@ -92,9 +92,7 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, pollHandler.getPolls)
 		.post(isLoggedIn, pollHandler.addPoll)
 		.delete(isLoggedIn, pollHandler.removePoll)
-		.put(isLoggedIn, hasNotVoted, pollHandler.updatePoll, voteHandler.addVote)
-		
-	
+		.put(isLoggedIn, hasNotVoted, pollHandler.updatePoll, voteHandler.addVote);
 		
 	function hasNotVoted (req, res, next) {
 		voteHandler.hasNotVoted(req, res, next);

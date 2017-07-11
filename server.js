@@ -1,4 +1,4 @@
-// TODO: allow sharing on reddit
+// TODO: consolidate polling APIs
 // TODO: use socket.io to update polling results as other users are voting
 
 'use strict';

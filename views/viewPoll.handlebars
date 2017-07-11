@@ -3,6 +3,7 @@
     <div id='pollObject' value='{{ poll._id }}'></div>
     
     <br><br>
+    <a target='_blank' href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location) + '&title={{poll.question}}'; return false">Share on Reddit</a>
     {{#if username}}
     {{#unless userVoteCount }}
     <div id='voting-options'>
