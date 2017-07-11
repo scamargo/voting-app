@@ -89,7 +89,7 @@ module.exports = function (app, passport) {
 		});
 	
 	app.route('/api/:id/polls')
-		.get(isLoggedIn, pollHandler.getPolls)
+		.get(pollHandler.getPolls)
 		.post(isLoggedIn, pollHandler.addPoll)
 		.delete(isLoggedIn, pollHandler.removePoll)
 		.put(isLoggedIn, hasNotVoted, pollHandler.updatePoll, voteHandler.addVote);
@@ -100,9 +100,5 @@ module.exports = function (app, passport) {
 		
 	app.route('/api/:id/votes')
 		.post(isLoggedIn, hasNotVoted, voteHandler.addVote); // Respond with error when user is not authenticated
-		
-	app.get('/api/:id/poll', function(req, res) {
-		pollHandler.getPollById(req,res);
-	});
 
 };

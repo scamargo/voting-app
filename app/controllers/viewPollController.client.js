@@ -3,7 +3,7 @@
 
 (function () {
 
-var voteUrl = appUrl + '/api/:id/votes';
+var votesUrl = appUrl + '/api/:id/votes';
 var pollUrl = appUrl + '/api/:id/poll';
 var pollsUrl = appUrl + '/api/:id/polls';
 var pollId = document.getElementById('pollObject').getAttribute('value');
@@ -11,7 +11,7 @@ var voteCountView = document.querySelector('#voteCount');
 
 function updateVotes() {
         
-        var urlWithQuery = pollUrl + '?pollId=' + pollId;
+        var urlWithQuery = pollsUrl + '?pollId=' + pollId;
         ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', urlWithQuery, function(data){
 
             var pollObject = JSON.parse(data);
@@ -48,7 +48,7 @@ $('#submitVote').click(function(){ // TODO: test
         urlWithQuery = pollsUrl + urlQuery;
         
     } else {
-        urlWithQuery = voteUrl + urlQuery;
+        urlWithQuery = votesUrl + urlQuery;
     }
     
     ajaxFunctions.ready(ajaxFunctions.ajaxRequest(method, urlWithQuery, function(){
