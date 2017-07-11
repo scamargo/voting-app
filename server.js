@@ -1,3 +1,4 @@
+// TODO: add validation for all text input fields
 // TODO: use socket.io to update polling results as other users are voting
 
 'use strict';
@@ -13,7 +14,7 @@ var app = express();
 require('dotenv').load();
 require('./app/config/passport')(passport);
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.Promise = global.Promise;
 
 app.get('/jquery/jquery.js', function(req, res) {
