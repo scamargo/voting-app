@@ -1,3 +1,4 @@
+// TODO: make charts mobile friendly
 // TODO: add validation for all text input fields
 // TODO: use socket.io to update polling results as other users are voting
 
