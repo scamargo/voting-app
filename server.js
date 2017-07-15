@@ -1,5 +1,4 @@
-// TODO: make charts mobile friendly
-// TODO: add validation for all text input fields
+// TODO: do not allow repetitive or empty options || empty poll name
 // TODO: use socket.io to update polling results as other users are voting
 
 'use strict';

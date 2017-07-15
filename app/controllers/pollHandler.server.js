@@ -7,6 +7,7 @@ var PollOption = require('../models/pollOptions.js');
 var Vote = require('../models/votes.js')
 var mongoose = require('mongoose');
 var crypto = require('crypto');
+var validator = require('validator');
 
 function PollHandler () {
 
@@ -58,11 +59,21 @@ function PollHandler () {
 	};
 	
 	this.renderPoll = function(req, res) { 
+		if(!validator.isAlphanumeric(req.params.hash)){
+			res.render('errorPage',{'errorMessage':'Invalid hash'});
+			return;
+		}
+		
 		Poll
 			.findOne({ 'urlHash': req.params.hash })
 			.populate('optionsInPoll')
 			.exec(function (err, result) {
 				if (err) { throw err; }
+				
+				if(result==null){
+					res.render('errorPage',{'errorMessage':'That hash does not exist'});
+					return;
+				}
 				
 				var c = 0;
 				for(var i=0;i<result.optionsInPoll.length;i++){
