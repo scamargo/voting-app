@@ -142,6 +142,23 @@ function PollHandler () {
 	};
 
 	this.addPoll = function (req, res) {
+	    
+	    if(validator.isEmpty(req.query.question)) {
+	    	res.send('Question cannot be empty');
+	    	return;
+	    }
+	    
+	    if(req.query.options == null || req.query.options.length < 2) {
+	    	res.send('Poll must include at least two options');
+	    	return;
+	    }
+	    for(var i=0; i < req.query.options.length;i++) {
+			if(validator.isEmpty(req.query.options[i])) {
+				res.send('Poll options cannot be empty');
+				return;
+			}
+		}
+	    
 	    User
 			.findOne({ 'reddit.id': req.user.reddit.id })
 			.exec(function (err, result) {

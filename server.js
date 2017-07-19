@@ -1,4 +1,4 @@
-// TODO: do not allow repetitive or empty options || empty poll name
+// TODO: sanitize results coming in through createPoll or ViewPoll page
 // TODO: use socket.io to update polling results as other users are voting
 
 'use strict';

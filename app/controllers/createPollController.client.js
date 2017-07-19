@@ -1,17 +1,13 @@
 
-
 'use strict';
+
+var pollUrl = appUrl + '/api/:id/polls';
+var pollOptions;
+var questionInput = document.querySelector("#question");
 
 (function () {
 
-   var questionInput = document.querySelector("#question");
-   var pollUrl = appUrl + '/api/:id/polls';
-   var pollOptions;
    var createPollButton = document.querySelector('#create-poll');
-   
-   createPollButton.addEventListener('click', function () {
-      savePoll()
-   }, false);
    
    $(document).keypress(function(e) {
        if(e.which == 13) {
@@ -42,18 +38,27 @@
       $(this).parent('div').remove();
    }
 
-   function savePoll() {
-      var urlWithQuery = pollUrl + '?question=' + questionInput.value;
-      pollOptions = document.querySelectorAll('.option');
-      // loop through options and add them to query string
-      for(var i=0;i<pollOptions.length;i++) {
-         urlWithQuery += '&options[]=' + pollOptions[i].value;   
-      }
+})();
 
-      ajaxFunctions.ready(ajaxFunctions.ajaxRequest('POST', urlWithQuery, function (data) {
-         var pollObject = JSON.parse(data);
-         window.location = appUrl + '/polls/' + pollObject.urlHash;
-      }));
+function savePoll() { // has to be outside iife to be in global scope
+   var urlWithQuery = pollUrl + '?question=' + $('#question').val();
+   pollOptions = document.querySelectorAll('.option');
+   
+   // loop through options and add them to query string
+   for(var i=0;i<pollOptions.length;i++) {
+      if(pollOptions[i].value != "") {
+         urlWithQuery += '&options[]=' + pollOptions[i].value;  
+      }
    }
 
-})();
+   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('POST', urlWithQuery, function (data) {
+      try {
+         var pollObject = JSON.parse(data);
+         window.location = appUrl + '/polls/' + pollObject.urlHash;
+      }
+      catch(err) {
+         alert(data); //assumes data is text
+      }
+   }));
+   return false;
+}

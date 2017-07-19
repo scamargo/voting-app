@@ -1,15 +1,17 @@
 
 <div class="container-fluid">
 	<p class="page-title">New Poll</p>
+	<form onSubmit="return savePoll()">
 	<p>Question <input type="text" id="question"/></p>
 	<div id="options">
 	    <p>Options</p>
 	    <button id="add-option" class="btn">+</button>
-	    <input type="text" class='option'/>
-	    <input type="text" class='option'/>
+	    <input required type="text" class='option'/>
+	    <input required type="text" class='option'/>
 	</div>
 	<br>
 	<button type="submit" id="create-poll" class="btn">Create Poll</button>
+	</form>
 </div>
 
 <script type="text/javascript" src="/common/ajax-functions.js"></script>
