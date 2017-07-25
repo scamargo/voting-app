@@ -30,15 +30,19 @@ function updateVotes() {
 
 updateVotes();
 
-$('#submitVote').click(function(){ // TODO: test
-    // TODO: return false if no radio button selected
+$('#submitVote').click(function(){
     var urlWithQuery = '';
     var method = 'POST';
     var urlQuery = $('input[name=option]:checked').val();
     var isLastSelected = $('input[name=option]:last').is(':checked');
     
+    if(urlQuery == null){
+        alert('please select an option before submitting vote');
+        return false;    
+    }
+    
     if (isLastSelected) {
-        if(!isInputValid('#otherOption')) { // TODO: make work
+        if(!isInputValid('#otherOption')) {
             alert('input cant be empty');
             return false;
         }
