@@ -1,5 +1,6 @@
-// TODO: sanitize results coming in through createPoll or ViewPoll page
 // TODO: use socket.io to update polling results as other users are voting
+// TODO: sanitize results coming in through createPoll or ViewPoll page
+
 
 'use strict';
 
@@ -11,6 +12,9 @@ var session = require('express-session');
 var exphbs  = require('express-handlebars');
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 require('dotenv').load();
 require('./app/config/passport')(passport);
 
@@ -23,6 +27,10 @@ app.get('/jquery/jquery.js', function(req, res) {
 
 app.get('/handlebars/handlebars.js', function(req, res) {
     res.sendFile(__dirname + '/node_modules/express-handlebars/node_modules/handlebars/dist/handlebars.min.js');
+});
+
+app.get('/socket.io/socket.io.js', function(req, res) {
+    res.sendFile(__dirname + '/node_modules/socket.io/lib/socket.js');
 });
 
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
@@ -42,9 +50,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-routes(app, passport);
+routes(app, passport, io);
 
 var port = process.env.PORT || 8080;
-app.listen(port,  function () {
-	console.log('Node.js listening on port ' + port + '...');
+
+http.listen(port, function(){
+  console.log('listening on *:' + port);
 });

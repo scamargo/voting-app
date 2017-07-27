@@ -5,7 +5,7 @@ var PollHandler = require(path + '/app/controllers/pollHandler.server.js');
 var VoteHandler = require(path + '/app/controllers/voteHandler.server.js')
 var crypto = require('crypto');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, io) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -22,6 +22,13 @@ module.exports = function (app, passport) {
 		.get(function (req, res) {
 			pollHandler.renderAllPolls(req,res);
 		});
+		
+	io.on('connection', function(socket){
+		console.log('a user connected');
+		socket.on('disconnect', function(){
+    		console.log('user disconnected');
+		});
+	});
 
 	app.route('/login')
 		.get(function (req, res) {
