@@ -32,7 +32,7 @@ module.exports = function (app, passport, io) {
 
 	app.route('/login')
 		.get(function (req, res) {
-			res.sendFile(path + '/public/login.html');
+			res.redirect('/auth/reddit');
 		});
 
 	app.route('/logout')
